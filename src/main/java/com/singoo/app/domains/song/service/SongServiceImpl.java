@@ -36,8 +36,10 @@ public class SongServiceImpl implements SongServiceInterface {
         Page<Song> songPage;
     
         if (searchTerm != null && !searchTerm.trim().isEmpty()) {
+            System.out.println(searchTerm);
             songPage = songRepository.findByTitleContainingIgnoreCaseOrArtistContainingIgnoreCase(searchTerm, searchTerm, pageable);
         } else {
+             System.out.println(searchTerm);
             songPage = songRepository.findAll(pageable);
         }
 

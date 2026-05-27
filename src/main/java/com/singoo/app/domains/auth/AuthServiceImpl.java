@@ -23,7 +23,7 @@ public class AuthServiceImpl implements AuthServiceInterface {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider tokenProvider;
 
-    @Autowired
+  
     public AuthServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository,
                            PasswordEncoder passwordEncoder, JwtTokenProvider tokenProvider) {
         this.authenticationManager = authenticationManager;
