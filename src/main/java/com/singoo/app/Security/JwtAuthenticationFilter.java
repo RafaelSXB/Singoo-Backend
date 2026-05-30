@@ -36,7 +36,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws BadCredentialsException, ServletException,IOException {
         try {
             String jwt = getJwtFromRequest(request);
-            System.out.println("Token JWT recebido: " + jwt);
+            
+            if (jwt == null) {
+               filterChain.doFilter(request, response);
+                return;
+            }
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 String username = tokenProvider.getUsernameFromJWT(jwt);
 

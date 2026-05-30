@@ -21,6 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.singoo.app.Security.JwtAuthenticationFilter;
 import com.singoo.app.Security.JwtTokenProvider;
+import com.singoo.app.Security.exception.GlobalExceptionHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +29,9 @@ public class SecurityConfig {
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private GlobalExceptionHandler globalExceptionHandler;
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
@@ -43,7 +47,8 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .requestMatchers("/api/auth/**").permitAll()
             .anyRequest().authenticated()
         ).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .exceptionHandling(ex -> ex.authenticationEntryPoint(globalExceptionHandler) );
 
     return http.build();
 }
