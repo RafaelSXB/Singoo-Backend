@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthServiceInterface {
         String jwt = tokenProvider.generateToken(authentication);
 
 
-        AuthResponseDTO.UserDto userDto = new AuthResponseDTO.UserDto(savedUser.getId(), savedUser.getEmail(), savedUser.getTier());
+        AuthResponseDTO.UserDto userDto = new AuthResponseDTO.UserDto(savedUser.getId(),savedUser.getName(), savedUser.getEmail(), savedUser.getTier());
         return new AuthResponseDTO(jwt, userDto);
     }
 
@@ -73,7 +73,7 @@ public class AuthServiceImpl implements AuthServiceInterface {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado após autenticação"));
 
-        AuthResponseDTO.UserDto userDto = new AuthResponseDTO.UserDto(user.getId(), user.getEmail(), user.getTier());
+        AuthResponseDTO.UserDto userDto = new AuthResponseDTO.UserDto(user.getId(),user.getName(), user.getEmail(), user.getTier());
         return new AuthResponseDTO(jwt, userDto);
     }
 }

@@ -44,7 +44,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .cors(Customizer.withDefaults()) 
         .csrf(csrf -> csrf.disable())   
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/v1/auth/**").permitAll()
             .anyRequest().authenticated()
         ).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

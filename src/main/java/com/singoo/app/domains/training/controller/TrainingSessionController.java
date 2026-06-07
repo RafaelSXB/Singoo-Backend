@@ -26,7 +26,7 @@ public class TrainingSessionController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("/songs/{songId}/ranking")
+    @GetMapping("/sessions/{songId}/ranking")
     public ResponseEntity<RankingResponseDTO> getSongRanking(@PathVariable UUID songId) {
         RankingResponseDTO response = trainingService.getSongRanking(songId);
         return ResponseEntity.ok(response);

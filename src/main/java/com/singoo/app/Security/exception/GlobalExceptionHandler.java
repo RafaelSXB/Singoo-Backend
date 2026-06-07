@@ -132,4 +132,19 @@ public class GlobalExceptionHandler implements AuthenticationEntryPoint {
 
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
+
+        @ExceptionHandler(IllegalArgumentException.class)
+        public ResponseEntity<ErrorResponseDTO> illegalArgumentException(IllegalArgumentException ex, HttpServletRequest request) {
+
+                ErrorResponseDTO errorResponse = new ErrorResponseDTO(
+                                LocalDateTime.now(),
+                                HttpStatus.CONFLICT.value(),
+                                HttpStatus.CONFLICT.getReasonPhrase(),
+                                ex.getMessage(),
+                                request.getRequestURI());
+
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+        }
+
+        
 }

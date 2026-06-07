@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/requests")
+@RequestMapping("/api/v1/requests")
 public class SongRequestController {
 
     private final SongRequestInterface songRequestInterface;
